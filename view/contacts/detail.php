@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="../../public/css/globalStyles.css">
+<link rel="stylesheet" href="../../public/css/detail.css">
+
+<?php if (isset($_SESSION['edit_message'])) { ?>
+  <div class="alert alert-danger" role="alert" id="edit_message">
+    <?php echo $_SESSION['edit_message'] ?>
+  </div>
+<?php unset($_SESSION['edit_message']);
+} ?>
+
+
+<div class="container">
+  <input type="hidden" name="id" value="<?php echo $detail['id'] ?>">
+  <div class="content">
+    <h2>Edit Form</h2>
+    <div class="form-input">
+      <label for="">first name</label>
+      <input type="text" placeholder="Please enter last name" name="lastName" value="<?php echo $detail['first_name'] ?>" disabled />
+    </div>
+    <div class="form-input">
+      <label for="">last name</label>
+      <input type="text" placeholder="Please enter last name" name="lastName" value="<?php echo $detail['last_name'] ?>" disabled />
+    </div>
+    <div class="form-input">
+      <label for="">email</label>
+      <input type="text" placeholder="Please enter email" name="email" value="<?php echo $detail['email'] ?>" disabled />
+    </div>
+    <div class="form-input">
+      <label for="">phone</label>
+      <input type="text" placeholder="Please enter phone" name="phone" value="<?php echo $detail['phone'] ?>" disabled />
+    </div>
+    <div class="form-input">
+      <label for="">address</label>
+      <textarea name="address" cols="30" rows="10" placeholder="Please enter address" disabled><?php echo $detail['address'] ?></textarea>
+    </div>
+    <div class="form-button">
+      <a href="index">Exit</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  setTimeout(function() {
+    var editMessage = document.getElementById('edit_message');
+    if (editMessage) {
+      editMessage.style.display = 'block';
+      setTimeout(function() {
+        editMessage.style.display = 'none';
+      }, 2000);
+    }
+  }, 0);
+</script>

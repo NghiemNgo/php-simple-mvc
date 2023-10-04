@@ -1,30 +1,29 @@
 <?php
+session_start();
 // Load configuration
 require_once('config/database.php');
 
 // Autoload classes
-spl_autoload_register(function ($class_name) {
-    include 'model/' . $class_name . '.php';
-    include 'controller/' . $class_name . '.php';
-});
+require_once(__DIR__ . "/model/Database.php");
+require_once(__DIR__ . "/model/ContactModel.php");
+require_once(__DIR__ . "/controller/ContactController.php");
 
 // Parse the URI
-$uri = $_GET['uri'] ? $_GET['uri'] : '';
+$uri = !empty($_GET['uri']) ? $_GET['uri'] : '';
 $uri = rtrim($uri, '/'); // Remove trailing slashes
 $uri_parts = explode('/', $uri);
 
 // Define default controller and method
 $controller_name = 'ContactController';
 $method_name = 'index';
-
 // Check if a specific controller and method are requested
+
 if (!empty($uri_parts[0])) {
     $controller_name = ucfirst($uri_parts[0]) . 'Controller';
     if (!empty($uri_parts[1])) {
         $method_name = $uri_parts[1];
     }
 }
-
 // Check if the controller class exists
 if (class_exists($controller_name)) {
     // Create an instance of the controller
